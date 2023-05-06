@@ -1,7 +1,9 @@
 import { FormGroup } from "@/components/FormGroup";
+import { Button } from "@/components/button";
 import Input from "@/components/input";
 import { api } from "@/utils/api";
 import { type NextPage } from "next";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import React, { useState } from "react";
 
@@ -18,7 +20,6 @@ const GeneratePage: NextPage = () => {
 
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: Submit the form data to the backend.
     generateIcon.mutate({
       prompt: form.prompt,
     });
@@ -33,6 +34,10 @@ const GeneratePage: NextPage = () => {
     };
   }
 
+  const session = useSession();
+
+  const isLoggedIn = !!session.data;
+
   return (
     <>
       <Head>
@@ -41,12 +46,31 @@ const GeneratePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-neutral-700 to-neutral-950 ">
+        {!isLoggedIn && (
+          <Button
+            onClick={() => {
+              signIn().catch(console.error);
+            }}
+          >
+            Log in
+          </Button>
+        )}
+        {isLoggedIn && (
+          <Button
+            onClick={() => {
+              signOut().catch(console.error);
+            }}
+          >
+            Log out
+          </Button>
+        )}
+
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
           <FormGroup>
             <label className="font-semibold">Prompt</label>
             <Input value={form.prompt} onChange={updateForm("prompt")}></Input>
           </FormGroup>
-          <button id="submit-btn">Submit</button>
+          <Button>Submit</Button>
         </form>
       </main>
     </>
