@@ -15,7 +15,7 @@ const s3 = new AWS.S3({
   region: "us-east-1",
 });
 
-// const BUCKET_NAME = "alw-icon-generator";
+const BUCKET_NAME = "alw-icon-generator";
 
 const configuration = new Configuration({
   apiKey: env.DALLE_API_KEY,
@@ -77,7 +77,7 @@ export const generateRouter = createTRPCRouter({
 
       await s3
         .putObject({
-          Bucket: "alw-icon-generator",
+          Bucket: BUCKET_NAME,
           Body: Buffer.from(base64EncodedImages!, "base64"),
           Key: icon.id,
           ContentEncoding: "base64",
@@ -86,7 +86,7 @@ export const generateRouter = createTRPCRouter({
         .promise();
 
       return {
-        imageUrl: base64EncodedImages,
+        imageUrl: `https://${BUCKET_NAME}.s3.us-east-2.amazonaws.com/${icon.id}`,
       };
     }),
 });

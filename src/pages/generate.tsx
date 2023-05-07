@@ -5,6 +5,7 @@ import { api } from "@/utils/api";
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
 import React, { useState } from "react";
 // import { api } from "@/utils/api";
 
@@ -77,8 +78,8 @@ const GeneratePage: NextPage = () => {
           </FormGroup>
           <Button>Submit</Button>
         </form>
-        <img
-          src={`data:image/png;base64, ${imageUrl}`}
+        <Image
+          src={imageUrl}
           width={100}
           height={100}
           alt="image generated from the app"
