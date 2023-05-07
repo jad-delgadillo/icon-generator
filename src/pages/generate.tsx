@@ -6,15 +6,19 @@ import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import React, { useState } from "react";
+// import { api } from "@/utils/api";
 
 const GeneratePage: NextPage = () => {
   const [form, setForm] = useState({
     prompt: "",
   });
+  const [imageUrl, setImageUrl] = useState("");
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess(data) {
-      console.log("mutation finished", data);
+      console.log("mutation finished", data.imageUrl);
+      if (!data.imageUrl) return;
+      setImageUrl(data.imageUrl);
     },
   });
 
@@ -23,6 +27,7 @@ const GeneratePage: NextPage = () => {
     generateIcon.mutate({
       prompt: form.prompt,
     });
+    setForm({ prompt: "" });
   }
 
   function updateForm(key: string) {
@@ -72,6 +77,12 @@ const GeneratePage: NextPage = () => {
           </FormGroup>
           <Button>Submit</Button>
         </form>
+        <img
+          src={`data:image/png;base64, ${imageUrl}`}
+          width={100}
+          height={100}
+          alt="image generated from the app"
+        />
       </main>
     </>
   );
