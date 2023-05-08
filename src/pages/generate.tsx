@@ -81,7 +81,7 @@ const GeneratePage: NextPage = () => {
             </FormGroup>
           </div>
           <div className="style">
-            <h5>2. Pick up your icon color</h5>
+            <h5>2. Pick up your icon color:</h5>
             <FormGroup className="grid grid-cols-4">
               {colors.map((color) => (
                 <label key={color} className="flex gap-2  py-3 font-semibold">
