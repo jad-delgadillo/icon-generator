@@ -81,6 +81,7 @@ export const generateRouter = createTRPCRouter({
       await s3
         .putObject({
           Bucket: BUCKET_NAME,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           Body: Buffer.from(base64EncodedImages!, "base64"),
           Key: icon.id,
           ContentEncoding: "base64",
