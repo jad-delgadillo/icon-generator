@@ -21,3 +21,7 @@ h3 {
 h4 {
   @apply text-xl;
 }
+
+.style {
+  @apply mt-4 rounded-lg bg-zinc-900 p-2;
+}
