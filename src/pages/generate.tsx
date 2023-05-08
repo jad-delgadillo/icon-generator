@@ -114,7 +114,7 @@ const GeneratePage: NextPage = () => {
               <Button
                 type="submit"
                 disabled={true}
-                className="mt-4 block w-28 bg-neutral-900 text-neutral-500 opacity-50 ring-neutral-700 hover:text-neutral-500"
+                className="mt-4 hidden w-28 bg-neutral-900 text-neutral-500 opacity-50 ring-neutral-700 hover:text-neutral-500"
               >
                 Submit
               </Button>
