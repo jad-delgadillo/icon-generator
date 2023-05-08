@@ -50,7 +50,6 @@ const GeneratePage: NextPage = () => {
   }
 
   const session = useSession();
-
   const isLoggedIn = !!session.data;
 
   return (
@@ -99,13 +98,30 @@ const GeneratePage: NextPage = () => {
               ))}
             </FormGroup>
           </div>
-          <Button
-            isLoading={generateIcon.isLoading}
-            disabled={generateIcon.isLoading}
-            className="mt-4 block w-28"
-          >
-            Submit
-          </Button>
+          {isLoggedIn && (
+            <>
+              <Button
+                isLoading={generateIcon.isLoading}
+                disabled={generateIcon.isLoading}
+                className="mt-4 block w-28"
+              >
+                Submit
+              </Button>
+            </>
+          )}
+          {!isLoggedIn && (
+            <>
+              <Button
+                disabled={true}
+                className="mt-4 block w-28 bg-neutral-900 text-neutral-500 opacity-50 ring-neutral-700 hover:text-neutral-500"
+              >
+                Submit
+              </Button>
+              <p className="mt-3 inline-block w-fit cursor-default rounded-lg border px-2 py-2 text-neutral-300 hover:text-neutral-100">
+                You have to Log-in to be able to submit.
+              </p>
+            </>
+          )}
         </form>
 
         {imageUrl && (

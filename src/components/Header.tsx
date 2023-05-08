@@ -1,5 +1,3 @@
-import React from "react";
-
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "./button";
 import { useBuyCredits } from "@/hooks/useBuyCredits";
@@ -7,8 +5,8 @@ import Link from "next/link";
 
 export default function Header() {
   const session = useSession();
-  const isLoggedIn = !!session.data;
   const { buyCredits } = useBuyCredits();
+  const isLoggedIn = !!session.data;
 
   return (
     <header className="fixed w-screen ">
