@@ -112,6 +112,7 @@ const GeneratePage: NextPage = () => {
           {!isLoggedIn && (
             <>
               <Button
+                type="submit"
                 disabled={true}
                 className="mt-4 block w-28 bg-neutral-900 text-neutral-500 opacity-50 ring-neutral-700 hover:text-neutral-500"
               >
