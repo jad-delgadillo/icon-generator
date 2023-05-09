@@ -20,23 +20,36 @@ const colors = [
 ];
 const shapes = ["square", "circle", "rounded"];
 
+const styles = [
+  "claymorphic",
+  "3d rendered",
+  "pixelated",
+  "illustrated with color pencil",
+];
+
 const GeneratePage: NextPage = () => {
   const [form, setForm] = useState({
     prompt: "",
     color: "",
     numberOfIcons: "1",
     shape: "",
+    style: "",
   });
+  const [error, setError] = useState("");
   const [imagesUrl, setImagesUrl] = useState<{ imageUrl: string }[]>([]);
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess(data) {
       setImagesUrl(data);
     },
+    onError(error) {
+      setError(error.message);
+    },
   });
 
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setError("");
     generateIcon.mutate({
       ...form,
       numberOfIcons: parseInt(form.numberOfIcons),
@@ -119,6 +132,23 @@ const GeneratePage: NextPage = () => {
             </FormGroup>
           </div>
           <div className="style">
+            <h5>3. Pick up your icon style:</h5>
+            <FormGroup className="grid grid-cols-4">
+              {styles.map((style) => (
+                <label key={style} className="flex gap-2  py-3 font-semibold">
+                  <input
+                    required
+                    type="radio"
+                    name="style"
+                    checked={style === form.style}
+                    onChange={() => setForm((prev) => ({ ...prev, style }))}
+                  ></input>
+                  {style}
+                </label>
+              ))}
+            </FormGroup>
+          </div>
+          <div className="style">
             <h5>3. How many dow you want?</h5>
             <FormGroup className="flex flex-col">
               <label>Number of icons</label>
@@ -135,10 +165,15 @@ const GeneratePage: NextPage = () => {
           </div>
           {isLoggedIn && (
             <>
+              {error && (
+                <div className="mt-4 flex animate-pulse cursor-default items-center justify-center rounded-lg bg-red-900  p-2 font-semibold text-white ring-1 ring-red-500 ">
+                  {error}
+                </div>
+              )}
               <Button
                 isLoading={generateIcon.isLoading}
                 disabled={generateIcon.isLoading}
-                className="mt-4 block w-28"
+                className="mb-10 mt-4 block w-28"
               >
                 Submit
               </Button>
