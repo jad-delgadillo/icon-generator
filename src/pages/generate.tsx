@@ -18,26 +18,29 @@ const colors = [
   "white",
   "black",
 ];
+const shapes = ["square", "circle", "rounded"];
 
 const GeneratePage: NextPage = () => {
   const [form, setForm] = useState({
     prompt: "",
     color: "",
+    numberOfIcons: "1",
+    shape: "",
   });
-  const [imageUrl, setImageUrl] = useState("");
+  const [imagesUrl, setImagesUrl] = useState<{ imageUrl: string }[]>([]);
 
   const generateIcon = api.generate.generateIcon.useMutation({
     onSuccess(data) {
-      console.log("mutation finished", data.imageUrl);
-      if (!data.imageUrl) return;
-      setImageUrl(data.imageUrl);
+      setImagesUrl(data);
     },
   });
 
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
-    generateIcon.mutate(form);
-    // setForm((prev) => ({ ...prev, prompt: "" }));
+    generateIcon.mutate({
+      ...form,
+      numberOfIcons: parseInt(form.numberOfIcons),
+    });
   }
 
   function updateForm(key: string) {
@@ -77,6 +80,7 @@ const GeneratePage: NextPage = () => {
               <Input
                 value={form.prompt}
                 onChange={updateForm("prompt")}
+                required
               ></Input>
             </FormGroup>
           </div>
@@ -86,16 +90,47 @@ const GeneratePage: NextPage = () => {
               {colors.map((color) => (
                 <label key={color} className="flex gap-2  py-3 font-semibold">
                   <input
+                    required
                     type="radio"
                     name="color"
                     checked={color === form.color}
-                    onChange={() => {
-                      setForm((prev) => ({ ...prev, color }));
-                    }}
+                    onChange={() => setForm((prev) => ({ ...prev, color }))}
                   ></input>
                   {color}
                 </label>
               ))}
+            </FormGroup>
+          </div>
+          <div className="style">
+            <h5>3. Pick up your icon shape:</h5>
+            <FormGroup className="grid grid-cols-4">
+              {shapes.map((shape) => (
+                <label key={shape} className="flex gap-2  py-3 font-semibold">
+                  <input
+                    required
+                    type="radio"
+                    name="shape"
+                    checked={shape === form.shape}
+                    onChange={() => setForm((prev) => ({ ...prev, shape }))}
+                  ></input>
+                  {shape}
+                </label>
+              ))}
+            </FormGroup>
+          </div>
+          <div className="style">
+            <h5>3. How many dow you want?</h5>
+            <FormGroup className="flex flex-col">
+              <label>Number of icons</label>
+              <div className="">
+                <Input
+                  inputMode="numeric"
+                  pattern="[1-9]|10"
+                  value={form.numberOfIcons}
+                  required
+                  onChange={updateForm("numberOfIcons")}
+                ></Input>
+              </div>
             </FormGroup>
           </div>
           {isLoggedIn && (
@@ -125,17 +160,20 @@ const GeneratePage: NextPage = () => {
           )}
         </form>
 
-        {imageUrl && (
+        {imagesUrl.length > 0 && (
           <div className="mt-4">
             <h4>Your Icons</h4>
             <section className="mb-12 grid grid-cols-4 gap-4 ">
-              <Image
-                src={imageUrl}
-                width={100}
-                height={100}
-                alt="image generated from the app"
-                className="w-full rounded-lg"
-              />
+              {imagesUrl.map(({ imageUrl }) => (
+                <Image
+                  key={imageUrl}
+                  src={imageUrl}
+                  width={512}
+                  height={512}
+                  alt="image generated from the app"
+                  className="w-full rounded-lg"
+                />
+              ))}
             </section>
           </div>
         )}

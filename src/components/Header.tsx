@@ -2,11 +2,13 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "./button";
 import { useBuyCredits } from "@/hooks/useBuyCredits";
 import Link from "next/link";
+import { api } from "@/utils/api";
 
 export default function Header() {
   const session = useSession();
   const { buyCredits } = useBuyCredits();
   const isLoggedIn = !!session.data;
+  const credits = api.user.getCredits.useQuery();
 
   return (
     <header className="fixed w-screen ">
@@ -20,19 +22,30 @@ export default function Header() {
           </Link>
 
           {isLoggedIn && (
-            <div className="">
-              <Link
-                className="rounded-lg p-3 font-semibold ring-1 ring-white transition-all hover:bg-gray-950 hover:text-indigo-500 hover:ring-indigo-600"
-                href={"/collection"}
-              >
-                My collection
-              </Link>
+            <div className="flex gap-4">
+              <div className="">
+                <Link
+                  className="rounded-lg p-3 font-semibold ring-1 ring-white transition-all hover:bg-gray-950 hover:text-indigo-500 hover:ring-indigo-600"
+                  href={"/collection"}
+                >
+                  My collection
+                </Link>
+              </div>
+              <div className="">
+                <Link
+                  className="rounded-lg p-3 font-semibold ring-1 ring-white transition-all hover:bg-gray-950 hover:text-indigo-500 hover:ring-indigo-600"
+                  href={"/community"}
+                >
+                  Community
+                </Link>
+              </div>
             </div>
           )}
 
           <ul className="flex items-center justify-center gap-4">
             {isLoggedIn && (
               <>
+                <p>Credits: {credits.data}</p>
                 <li>
                   <Button
                     onClick={() => {

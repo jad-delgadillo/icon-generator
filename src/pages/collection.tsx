@@ -4,7 +4,6 @@ import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
-import React, { useState } from "react";
 
 const CollectionPage: NextPage = () => {
   const icons = api.icons.getIcons.useQuery();
@@ -25,7 +24,7 @@ const CollectionPage: NextPage = () => {
         <div className="mt-[8rem] flex flex-col gap-2 rounded-lg bg-zinc-900 p-2">
           <h1 className="">My collection icons</h1>
           <p>Fill the form below to start generatig your icons.</p>
-          <ul className="grid grid-cols-1 items-center justify-center gap-4 md:grid-cols-6">
+          <ul className="grid grid-cols-2 items-center justify-center gap-4 md:grid-cols-6">
             {icons.data?.map((icon: Icon) => (
               <li key={icon.id}>
                 <Image
