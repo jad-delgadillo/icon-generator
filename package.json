@@ -8,7 +8,7 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe"
+    "stripe:listen": "stripe listen --forward-to icon.alwaysjad.dev/api/stripe"
   },
   "dependencies": {
     "@material-tailwind/react": "^2.0.0",
