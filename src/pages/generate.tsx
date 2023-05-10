@@ -188,7 +188,7 @@ const GeneratePage: NextPage = () => {
               >
                 Submit
               </Button>
-              <p className="mt-3 inline-block w-fit cursor-default rounded-lg border px-2 py-2 text-neutral-300 hover:text-neutral-100">
+              <p className="my-3 inline-block w-fit  cursor-default rounded-lg border border-red-500 px-2 py-2  text-red-500">
                 You have to Log-in to be able to submit.
               </p>
             </>

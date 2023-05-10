@@ -10,7 +10,7 @@ export default function HeaderLink(
     <Link
       {...props}
       className={clsx(
-        "inline-block rounded-lg bg-cyan-900 p-2 tracking-wider ring-2 ring-cyan-400 transition-all hover:scale-[102%] hover:bg-cyan-600 hover:ring-2  hover:ring-cyan-100",
+        "inline-block rounded-lg bg-cyan-900 p-2 font-semibold tracking-wider ring-1 ring-cyan-400 transition-all hover:scale-[102%] hover:bg-cyan-600 hover:ring-2  hover:ring-cyan-100",
         className ?? ""
       )}
       {...propsWithoutClassName}
