@@ -17,14 +17,25 @@ const colors = [
   "yellow",
   "white",
   "black",
+  "rgb colors",
+  "original colors",
+  "black and white",
 ];
-const shapes = ["square", "circle", "rounded"];
+const shapes = ["square", "circular", "rounded"];
 
 const styles = [
-  "claymorphic",
+  "digital art",
   "3d rendered",
   "pixelated",
-  "illustrated with color pencil",
+  "Claude Monet",
+  "pop art",
+  "isometric",
+  "illustrated",
+  "hyper realism",
+  "surrealism",
+  "hd photograph",
+  "hd render",
+  "Salvador Dalí",
 ];
 
 const GeneratePage: NextPage = () => {
