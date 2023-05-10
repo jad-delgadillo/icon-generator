@@ -189,8 +189,8 @@ export const DropDownMenu = () => {
                           }}
                           className={
                             pathname == "/resources"
-                              ? "rounded-md px-3 py-2 text-sm font-bold text-stone-500 transition duration-300"
-                              : "inline-block w-fit rounded-md border border-red-500 px-3 py-2 text-sm text-red-500 transition duration-300  hover:text-stone-500"
+                              ? "rounded-md px-3 py-2 text-sm font-bold text-red-500 transition duration-300"
+                              : "inline-block w-fit rounded-md border border-red-500 px-3 py-2 text-sm text-red-500 transition duration-300  "
                           }
                         >
                           Sign Out
