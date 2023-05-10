@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Popover, Transition } from "@headlessui/react";
 import { usePathname } from "next/navigation";
 import { Button } from "./button";
-import HeaderLink from "./HeaderLink";
 
 export const DropDownMenu = () => {
   const session = useSession();

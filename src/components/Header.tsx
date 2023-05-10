@@ -62,6 +62,19 @@ export default function Header() {
                 </li>
               </>
             )}
+            {!isLoggedIn && (
+              <>
+                <li>
+                  <Button
+                    onClick={() => {
+                      signIn().catch(console.error);
+                    }}
+                  >
+                    Log in
+                  </Button>
+                </li>
+              </>
+            )}
             <div className=" z-50 mr-2 flex md:hidden">
               {" "}
               <DropDownMenu />{" "}
