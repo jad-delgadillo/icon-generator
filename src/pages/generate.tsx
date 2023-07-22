@@ -24,6 +24,7 @@ const colors = [
 const shapes = ["square", "circular", "rounded"];
 
 const styles = [
+  "vector",
   "digital art",
   "3d rendered",
   "pixelated",
@@ -143,7 +144,7 @@ const GeneratePage: NextPage = () => {
             </FormGroup>
           </div>
           <div className="style">
-            <h5>3. Pick up your icon style:</h5>
+            <h5>4. Pick up your icon style:</h5>
             <FormGroup className="grid grid-cols-4">
               {styles.map((style) => (
                 <label key={style} className="flex gap-2  py-3 font-semibold">
@@ -160,7 +161,7 @@ const GeneratePage: NextPage = () => {
             </FormGroup>
           </div>
           <div className="style">
-            <h5>3. How many dow you want?</h5>
+            <h5>5. How many dow you want?</h5>
             <FormGroup className="flex flex-col">
               <label>Number of icons</label>
               <div className="">
